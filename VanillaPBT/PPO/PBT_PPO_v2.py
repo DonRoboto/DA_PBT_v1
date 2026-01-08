@@ -87,6 +87,8 @@ pbt = PopulationBasedTraining(
     custom_explore_fn=explore,
 )
 
+               
+                
 # --- EJECUCIÓN PRINCIPAL ---
 if __name__ == "__main__":
     if not ray.is_initialized():
@@ -146,13 +148,14 @@ if __name__ == "__main__":
                     # Espacio de búsqueda inicial (mutables)
                     "lambda": sample_from(lambda spec: random.uniform(0.9, 0.99)),
                     "clip_param": sample_from(lambda spec: random.uniform(0.1, 0.4)),
-                    "lr": sample_from(lambda spec: random.uniform(1e-5, 5e-4)),
-                    "train_batch_size": sample_from(lambda spec: random.randint(4000, 20000)),
+                    "lr": sample_from(lambda spec: random.uniform(1e-5, 1e-3)),
+                    "train_batch_size": sample_from(lambda spec: random.randint(2000, 40000)),
                     
                     # Optimizaciones
                     "compress_observations": True,
                 },
             )
+            
 
             fin = time.time()
             print(f"\n>>> Entrenamiento finalizado en {(fin - inicio)/60:.2f} minutos.")
